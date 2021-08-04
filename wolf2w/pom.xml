@@ -12,7 +12,6 @@
         <module>../trip-core</module>
         <module>../trip-mgrsite</module>
         <module>../trip-website-api</module>
-        <module>../trip-website</module>
     </modules>
 
     <parent>
@@ -29,12 +28,8 @@
                 <artifactId>trip-core</artifactId>
                 <version>1.0.0</version>
             </dependency>
-            <dependency>
-                <groupId>com.baomidou</groupId>
-                <artifactId>mybatis-plus-boot-starter</artifactId>
-                <version>3.4.0</version>
-            </dependency>
         </dependencies>
+
     </dependencyManagement>
 
 
