@@ -8,6 +8,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+
 @RestController
 @RequestMapping("users")
 public class UserInfoController {
@@ -21,25 +23,32 @@ public class UserInfoController {
         return userInfoService.getById(id);
     }
 
+    @PostMapping("/login")
+    private Object login(String username, String password) {
+
+        HashMap<String, Object> map = userInfoService.login(username, password);
+        //new HashMap<>();
+        return JsonResult.success(map);
+    }
+
 
     @PostMapping("/register")
     private Object register(String phone, String nickname, String password, String rpassword, String verifyCode) {
 
         userInfoService.register(phone,nickname,password,rpassword,verifyCode);
 
-
-        return null;
+        return JsonResult.success();
     }
 
 
     @GetMapping("/checkPhone")
     public Object checkPhone(String phone) {
-        System.out.println("--------" + userInfoService.checkPhone(phone));
         return userInfoService.checkPhone(phone) != null;
     }
 
-    @GetMapping("sendVerifyCode")
+    @GetMapping("/sendVerifyCode")
     public Object sendVerifyCode(String phone) {
+        userInfoService.sendVerifyCode(phone);
         return JsonResult.success("验证码发送成功");
     }
 
