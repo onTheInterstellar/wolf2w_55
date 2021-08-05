@@ -22,7 +22,9 @@
     </parent>
 
     <dependencyManagement>
+
         <dependencies>
+
             <dependency>
                 <groupId>cn.wolfcode.wolf2w</groupId>
                 <artifactId>trip-core</artifactId>
