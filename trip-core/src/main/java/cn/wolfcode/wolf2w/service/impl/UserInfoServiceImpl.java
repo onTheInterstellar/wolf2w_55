@@ -10,6 +10,7 @@ import cn.wolfcode.wolf2w.util.Consts;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import lombok.Getter;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.http.converter.StringHttpMessageConverter;
@@ -25,12 +26,13 @@ import java.util.UUID;
 @Transactional
 @ConfigurationProperties(prefix = "sms")
 @Getter
+@Setter
 public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> implements IUserInfoService {
 
 
     private String gateway;
-
     private String appKey;
+    private String success;
 
     @Autowired
     private IRedisService redisService;
@@ -112,15 +114,16 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
                 .append(", 有效时间是:").append(Consts.VERIFY_CODE_VAI_TIME).append(" 分钟, 请勿向他人泄露!");
 
         // 真实发送短信
-        String appKey = "1f5921e1a61866d5c82b38a9381ea14f";
-        String url = "https://way.jd.com/chuangxin/dxjk?mobile={phoneNumber}&content=【创信】{message}&appkey={0}";
+        // 下面的信息可以放到配置文件中, 判断是否成功的success每一个网关都不太一样
+        //String appKey = "1f5921e1a61866d5c82b38a9381ea14f";
+        //String url = "https://way.jd.com/chuangxin/dxjk?mobile={phoneNumber}&content=【创信】{message}&appkey={0}";
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
-        String result = restTemplate.getForObject(url, String.class, phone, message, appKey);
+        String result = restTemplate.getForObject(this.gateway, String.class);
         System.out.println(result);
-        if (!result.contains("Success")) {
+        if (!result.contains(success)) {
             throw new LogicException("验证码发送失败!");
         }
 

@@ -6,7 +6,7 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @MapperScan(basePackages = "cn.wolfcode.wolf2w.mapper")
-@PropertySource("classpath:core.properties")
+@PropertySource(value = {"classpath:core.properties", "classpath:smsInfo.properties"})
 public class CoreConfig {
 
 }
