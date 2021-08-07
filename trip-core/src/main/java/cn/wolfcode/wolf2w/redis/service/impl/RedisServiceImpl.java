@@ -9,6 +9,7 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.Duration;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
@@ -31,6 +32,7 @@ public class RedisServiceImpl implements IRedisService {
         if (redisTemplate.hasKey(tokenKey)) {
             // 获取userInfo
             String userInfoStr = redisTemplate.opsForValue().get(tokenKey);
+            redisTemplate.expire(tokenKey, Duration.ofMinutes(RedisKeys.REGISTER_VERIFY_CODE.getTime()));
             // 转成对象
             UserInfo userInfo = JSON.parseObject(userInfoStr, UserInfo.class);
             return  userInfo;

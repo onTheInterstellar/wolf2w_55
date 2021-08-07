@@ -1,6 +1,5 @@
 package cn.wolfcode.wolf2w.controller;
 
-import cn.wolfcode.wolf2w.annotation.RequireLogin;
 import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.redis.service.IRedisService;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
@@ -24,7 +23,7 @@ public class UserInfoController {
     @Autowired
     private IUserInfoService userInfoService;
 
-    @RequireLogin
+    //@RequireLogin
     @GetMapping("/currentUser")
     public Object currentUser(HttpServletRequest request) {
 

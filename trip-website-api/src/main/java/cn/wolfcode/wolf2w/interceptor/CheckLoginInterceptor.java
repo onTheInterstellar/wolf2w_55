@@ -12,6 +12,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+
 public class CheckLoginInterceptor implements HandlerInterceptor {
 
     @Autowired
@@ -24,11 +25,12 @@ public class CheckLoginInterceptor implements HandlerInterceptor {
         if (!(handler instanceof HandlerMethod))
             return true;
 
+        String token = request.getHeader("token");
+        UserInfo info = redisService.getUserInfoByToken(token);
+
         HandlerMethod handlerMethod = (HandlerMethod) handler;
         if (handlerMethod.hasMethodAnnotation(RequireLogin.class)) {
 
-            String token = request.getHeader("token");
-            UserInfo info = redisService.getUserInfoByToken(token);
             if (info == null)
             {
                 response.getWriter().write(JSON.toJSONString(JsonResult.noLogin()));
