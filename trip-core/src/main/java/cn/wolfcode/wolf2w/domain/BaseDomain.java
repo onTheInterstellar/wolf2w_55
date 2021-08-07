@@ -10,7 +10,7 @@ import lombok.Setter;
 public class BaseDomain {
 
     @TableId(type = IdType.AUTO)
-    private Long id;
+    protected Long id;
 
 
 }

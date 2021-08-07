@@ -1,12 +1,32 @@
 package cn.wolfcode.wolf2w.config;
 
+import cn.wolfcode.wolf2w.interceptor.CheckLoginInterceptor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
-public class WebsiteConfig {
+public class WebsiteConfig implements WebMvcConfigurer {
+
+    @Bean
+    public HandlerInterceptor checkLoginInterceptor() {
+        return new CheckLoginInterceptor();
+    }
+
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(checkLoginInterceptor())
+                .addPathPatterns("/**")
+                .excludePathPatterns("/users/login")
+                .excludePathPatterns("/users/register")
+                .excludePathPatterns("/users/sendVerifyCode")
+                .excludePathPatterns("/users/checkPhone");
+
+    }
 
     @Bean
     public WebMvcConfigurer corsConfigurer() {

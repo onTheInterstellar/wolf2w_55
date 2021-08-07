@@ -14,15 +14,29 @@
 
 </head>
 <body>
-rhohkehfoaehfioaehfiahekf ahedf
+这是 info
 <script>
     $(function () {
 
 
+        /*$.ajax({
+            url: domainUrl + "/users/currentUser",
+            type: "GET",
+            data: {},
+            beforeSend:function(xhr) {
+                xhr.setRequestHeader("token", getToken())
+            },
+            success: function (data) {
+                console.log(data)
+            }
+        })*/
 
-       ajaxGet("/test2", {a:1, b:2, c:3, d:4}, function (data) {
-           console.log(data);
-       })
+        // 简化
+        ajaxGet("/users/currentUser", {}, function (data) {
+            console.log(data)
+        })
+
+
 
 
     })

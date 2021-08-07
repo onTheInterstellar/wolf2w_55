@@ -7,6 +7,7 @@ import com.alibaba.fastjson.JSON;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
@@ -18,12 +19,26 @@ public class RedisServiceImpl implements IRedisService {
     private StringRedisTemplate redisTemplate;
 
 
-    /**
-     * 将userInfo对象存入redis
-     * 返回token
-     * @param userInfo
-     * @return
-     */
+    @Override
+    public UserInfo getUserInfoByToken(String token) {
+        //判断token是否为空
+        if (!StringUtils.hasText(token))
+            return null;
+        // 获取key
+        String tokenKey = RedisKeys.USER_LONGIN_TOKEN.join(token);
+
+        // 判断key是否过期
+        if (redisTemplate.hasKey(tokenKey)) {
+            // 获取userInfo
+            String userInfoStr = redisTemplate.opsForValue().get(tokenKey);
+            // 转成对象
+            UserInfo userInfo = JSON.parseObject(userInfoStr, UserInfo.class);
+            return  userInfo;
+        }
+
+        return null;
+    }
+
     @Override
     public String getToken(UserInfo userInfo) {
 
@@ -34,22 +49,14 @@ public class RedisServiceImpl implements IRedisService {
         return tokenElement;
     }
 
-    /**
-     * 通过phone过去验证码
-     * @param phone
-     * @return
-     */
+
     @Override
     public String getVerify(String phone) {
         String verifyCode = redisTemplate.opsForValue().get(RedisKeys.REGISTER_VERIFY_CODE.join(phone));
         return verifyCode;
     }
 
-    /**
-     * 将验证码把保存在redis中
-     * @param phone
-     * @param verifyCode
-     */
+
     @Override
     public void saveVerify(String phone, String verifyCode) {
         //String verifyKey = Consts.VERIFY_CODE + ":" +phone;
