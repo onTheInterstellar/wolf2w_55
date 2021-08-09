@@ -5,6 +5,8 @@ import cn.wolfcode.wolf2w.query.QueryObject;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.IService;
 
+import java.util.List;
+
 public interface IRegionService extends IService<Region> {
 
 
@@ -21,4 +23,10 @@ public interface IRegionService extends IService<Region> {
      * @param id
      */
     boolean changeHotValue(boolean hot, Long id);
+
+    /**
+     * 查找热门目的地
+     * @return
+     */
+    List<Region> QueryHotRegion();
 }

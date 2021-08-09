@@ -22,4 +22,12 @@ public interface IDestinationService extends IService<Destination> {
      * @return
      */
     List<Destination> queryToasts(Long parentId);
+
+
+    /**
+     * 查询热门区域对应的目的地
+     * @param regionId
+     * @return
+     */
+    List<Destination> QueryHotRegion(Long regionId);
 }

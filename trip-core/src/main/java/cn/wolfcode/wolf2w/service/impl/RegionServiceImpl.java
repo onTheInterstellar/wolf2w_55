@@ -10,6 +10,8 @@ import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> implements IRegionService {
 
@@ -18,6 +20,7 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
 
         Page<Region> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
         QueryWrapper wrapper = new QueryWrapper();
+        wrapper.orderByAsc("seq");
         //wrapper.like("name", qo.getKeyword());
         return super.page(page, wrapper);
     }
@@ -28,5 +31,13 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
         wrapper.set("ishot", hot);
         wrapper.eq("id", id);
         return super.update(wrapper);
+    }
+
+    @Override
+    public List<Region> QueryHotRegion() {
+
+        QueryWrapper wrapper = new QueryWrapper();
+        wrapper.eq("ishot", Region.STATE_HOT);
+        return super.list(wrapper);
     }
 }
