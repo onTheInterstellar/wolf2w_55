@@ -22,6 +22,7 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
         QueryWrapper wrapper = new QueryWrapper();
         wrapper.orderByAsc("seq");
         //wrapper.like("name", qo.getKeyword());
+
         return super.page(page, wrapper);
     }
 
