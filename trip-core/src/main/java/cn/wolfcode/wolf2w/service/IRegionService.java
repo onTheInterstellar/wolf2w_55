@@ -14,4 +14,11 @@ public interface IRegionService extends IService<Region> {
      * @return
      */
     Page<Region> QueryPage(QueryObject qo);
+
+    /**
+     * 修改热门状态
+     * @param hot
+     * @param id
+     */
+    boolean changeHotValue(boolean hot, Long id);
 }

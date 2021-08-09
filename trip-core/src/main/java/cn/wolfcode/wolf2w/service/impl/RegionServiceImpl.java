@@ -5,6 +5,7 @@ import cn.wolfcode.wolf2w.mapper.RegionMapper;
 import cn.wolfcode.wolf2w.query.QueryObject;
 import cn.wolfcode.wolf2w.service.IRegionService;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import org.springframework.stereotype.Service;
@@ -19,5 +20,13 @@ public class RegionServiceImpl extends ServiceImpl<RegionMapper, Region> impleme
         QueryWrapper wrapper = new QueryWrapper();
         //wrapper.like("name", qo.getKeyword());
         return super.page(page, wrapper);
+    }
+
+    @Override
+    public boolean changeHotValue(boolean hot, Long id) {
+        UpdateWrapper wrapper = new UpdateWrapper();
+        wrapper.set("ishot", hot);
+        wrapper.eq("id", id);
+        return super.update(wrapper);
     }
 }

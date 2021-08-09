@@ -107,7 +107,7 @@
                        <td th:text="${entityStat.index+1}"></td>
                        <td><a th:href="@{'/destination/list?parentId='+${entity.id}}" th:text="${entity.name}"></a></td>
                        <td th:text="${entity.english}"></td>
-                       <td th:text="${entity.parentName}">顶级</td>
+                       <td th:text="${entity.parentName == null ? '顶级': entity.parentName}">顶级</td>
                        <td>
                            <a class="btn btn-info btn-xs inputBtn" href="javascript:;" th:data-json='${entity.jsonString}'>
                                <span class="glyphicon glyphicon-edit"></span> 编辑

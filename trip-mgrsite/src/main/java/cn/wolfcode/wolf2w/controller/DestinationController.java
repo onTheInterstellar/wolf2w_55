@@ -10,6 +10,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
 @RequestMapping("destination")
 public class DestinationController {
@@ -21,7 +23,9 @@ public class DestinationController {
     private String list(ModelMap map, @ModelAttribute("qo") DestinationQuery qo) {
 
         Page<Destination> page = destinationService.QueryPage(qo);
+        List<Destination> toasts = destinationService.queryToasts(qo.getParentId());
         map.put("page", page);
+        map.put("toasts", toasts);
 
         return "/destination/list.html";
 

@@ -31,11 +31,29 @@
             }
         })*/
 
+
         // 简化
         ajaxGet("/users/currentUser", {}, function (data) {
             console.log(data)
         })
 
+        function ajaxRequest(url, type, data, success, fail) {
+            $.ajax({
+                url: domainUrl + url,
+                type: type,
+                data: data,
+                beforeSend:function(xhr) {
+                    xhr.setRequestHeader("token", getToken())
+                },
+                success: function (data) {
+                    if (data) {
+                        success(data)
+                    } else {
+                        fail(data)
+                    }
+                }
+            })
+        }
 
 
 

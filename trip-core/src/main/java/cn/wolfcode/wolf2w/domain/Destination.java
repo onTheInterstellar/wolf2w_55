@@ -21,6 +21,11 @@ public class Destination extends BaseDomain {
     private String english;  //英文名
 
     private Long parentId; //上级目的地
+
+/*    public String getParentName() {
+        return parentName == null ? "顶级" : this.parentName;
+    }*/
+
     private String parentName;  //上级目的名
 
     private String info;    //简介
@@ -28,6 +33,8 @@ public class Destination extends BaseDomain {
 
     @TableField(exist = false)
     private List<Destination> children = new ArrayList<>();
+
+
 
     public String getJsonString(){
         Map<String, Object> map = new HashMap<>();

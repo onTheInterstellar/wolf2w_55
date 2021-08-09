@@ -32,7 +32,7 @@ public class RedisServiceImpl implements IRedisService {
         if (redisTemplate.hasKey(tokenKey)) {
             // 获取userInfo
             String userInfoStr = redisTemplate.opsForValue().get(tokenKey);
-            redisTemplate.expire(tokenKey, Duration.ofMinutes(RedisKeys.REGISTER_VERIFY_CODE.getTime()));
+            redisTemplate.expire(tokenKey, Duration.ofMinutes(RedisKeys.USER_LONGIN_TOKEN.getTime()));
             // 转成对象
             UserInfo userInfo = JSON.parseObject(userInfoStr, UserInfo.class);
             return  userInfo;
