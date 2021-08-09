@@ -48,4 +48,10 @@ public class StrategyController {
         strategyService.removeById(id);
         return JsonResult.success();
     }
+
+    @RequestMapping("/input")
+    public String input(){
+        return "strategy/input";
+    }
+
 }
