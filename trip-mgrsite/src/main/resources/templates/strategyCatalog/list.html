@@ -96,7 +96,8 @@
                            </a>
 
                            <a href="javascript:;" class="btn btn-danger btn-xs deleteBtn"
-                              data-url="@{'/strategyCatalog/delete?id=' + ${entity.id}}">
+                              th:data-url=
+                           "@{'/strategyCatalog/delete?id=' + ${entity.id}}">
                                <span class="glyphicon glyphicon-trash"></span> 删除
                            </a>
                        </td>

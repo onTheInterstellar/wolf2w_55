@@ -41,6 +41,7 @@ public class Destination extends BaseDomain {
         map.put("id", super.getId());
         map.put("info", this.info);
 
+
         return JSON.toJSONString(map);
     }
 }

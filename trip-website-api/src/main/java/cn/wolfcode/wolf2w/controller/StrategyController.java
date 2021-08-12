@@ -1,51 +1,42 @@
 package cn.wolfcode.wolf2w.controller;
 
 import cn.wolfcode.wolf2w.domain.Strategy;
-import cn.wolfcode.wolf2w.query.StrategyQuery;
+import cn.wolfcode.wolf2w.domain.StrategyContent;
+import cn.wolfcode.wolf2w.mapper.StrategyContentMapper;
 import cn.wolfcode.wolf2w.service.IStrategyService;
 import cn.wolfcode.wolf2w.util.JsonResult;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
 * 用户控制层
 */
-@Controller
-@RequestMapping("strategy")
+@RestController
+@RequestMapping("strategies")
 public class StrategyController {
+
+    @Autowired
+    private StrategyContentMapper strategyContentMapper;
 
     @Autowired
     private IStrategyService strategyService;
 
-    @RequestMapping("/list")
-    public String list(Model model, @ModelAttribute("qo") StrategyQuery qo){
-        IPage<Strategy> page = strategyService.queryPage(qo);
-        model.addAttribute("page", page);
-        return "strategy/list";
+    @GetMapping("/content")
+    private Object content(Long id) {
+
+        StrategyContent strategyContent = strategyContentMapper.selectById(id);
+        return JsonResult.success(strategyContent);
+
     }
 
-    @RequestMapping("/get")
-    @ResponseBody
-    public Object get(Long id){
-        return JsonResult.success(strategyService.getById(id));
-    }
+    @GetMapping("/detail")
+    private Object detail(Long id) {
 
-    @RequestMapping("/saveOrUpdate")
-    @ResponseBody
-    public Object saveOrUpdate(Strategy strategy){
-        strategyService.saveOrUpdate(strategy);
-        return JsonResult.success();
-    }
+        Strategy strategy = strategyService.getById(id);
+        strategy.setContent(strategyContentMapper.selectById(id));
+        return JsonResult.success(strategy);
 
-    @RequestMapping("/delete")
-    @ResponseBody
-    public Object delete(Long id){
-        strategyService.removeById(id);
-        return JsonResult.success();
     }
 }

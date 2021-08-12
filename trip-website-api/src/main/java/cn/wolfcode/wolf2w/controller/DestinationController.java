@@ -1,9 +1,11 @@
 package cn.wolfcode.wolf2w.controller;
 
-import cn.wolfcode.wolf2w.domain.Destination;
-import cn.wolfcode.wolf2w.domain.Region;
+import cn.wolfcode.wolf2w.domain.*;
+import cn.wolfcode.wolf2w.mapper.StrategyContentMapper;
 import cn.wolfcode.wolf2w.service.IDestinationService;
 import cn.wolfcode.wolf2w.service.IRegionService;
+import cn.wolfcode.wolf2w.service.IStrategyCatalogService;
+import cn.wolfcode.wolf2w.service.IStrategyService;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,6 +24,15 @@ public class DestinationController {
     @Autowired
     private IRegionService regionService;
 
+    @Autowired
+    private IStrategyCatalogService catalogService;
+
+    @Autowired
+    private IStrategyService strategyService;
+
+    @Autowired
+    private StrategyContentMapper contentMapper;
+
     @GetMapping("/hotRegion")
     private Object list() {
 
@@ -39,5 +50,31 @@ public class DestinationController {
         return JsonResult.success(list);
 
     }
+
+    @GetMapping("/toasts")
+    private Object toasts(Long destId) {
+
+        List<Destination> list = destinationService.queryToasts(destId);
+        return JsonResult.success(list);
+
+    }
+
+    @GetMapping("/catalogs")
+    private Object catalogs(Long destId) {
+
+        List<StrategyCatalog> list = catalogService.queryCatalogs(destId);
+        return JsonResult.success(list);
+
+    }
+
+    @GetMapping("/strategies")
+    private Object strategies(Long destId) {
+
+        List<Strategy> list = strategyService.queryStrategiesById(destId);
+        return JsonResult.success(list);
+
+    }
+
+
 
 }
