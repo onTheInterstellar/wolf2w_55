@@ -62,6 +62,7 @@ public class StrategyController {
     @ResponseBody
     public Object delete(Long id){
         strategyService.removeById(id);
+        strategyContentMapper.deleteById(id);
         return JsonResult.success();
     }
 
@@ -79,10 +80,6 @@ public class StrategyController {
 
         List<CatalogVo> catalogs = strategyCatalogService.queryCatalogGroup();
         model.addAttribute("catalogs", catalogs);
-
-
-
-
 
         return "strategy/input";
 

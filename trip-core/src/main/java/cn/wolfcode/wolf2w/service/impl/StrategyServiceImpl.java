@@ -55,6 +55,8 @@ public class StrategyServiceImpl extends ServiceImpl<StrategyMapper,Strategy> im
     public IPage<Strategy> queryPage(StrategyQuery qo) {
         IPage<Strategy> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
         QueryWrapper<Strategy> wrapper = Wrappers.<Strategy>query();
+        wrapper.eq(qo.getDestId() != null, "dest_id", qo.getDestId())
+                .eq(qo.getThemeId() != null, "theme_id", qo.getThemeId());
         return super.page(page, wrapper);
     }
 
