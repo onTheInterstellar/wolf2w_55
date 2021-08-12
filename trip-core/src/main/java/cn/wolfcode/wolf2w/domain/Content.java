@@ -4,16 +4,12 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.io.Serializable;
-
-/**
- * 攻略内容
- */
-@Setter
+@TableName("content")
 @Getter
-@TableName("strategy_content")
-public class StrategyContent implements Serializable {
+@Setter
+public class Content {
+
     private Long id;
     private String content;
-}
 
+}

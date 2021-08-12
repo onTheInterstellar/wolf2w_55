@@ -1,11 +1,9 @@
 package cn.wolfcode.wolf2w.controller;
 
-import cn.wolfcode.wolf2w.domain.Strategy;
-import cn.wolfcode.wolf2w.domain.StrategyContent;
-import cn.wolfcode.wolf2w.domain.StrategyRank;
-import cn.wolfcode.wolf2w.domain.StrategyTheme;
+import cn.wolfcode.wolf2w.domain.*;
 import cn.wolfcode.wolf2w.mapper.StrategyContentMapper;
 import cn.wolfcode.wolf2w.query.StrategyQuery;
+import cn.wolfcode.wolf2w.service.IStrategyConditionService;
 import cn.wolfcode.wolf2w.service.IStrategyRankService;
 import cn.wolfcode.wolf2w.service.IStrategyService;
 import cn.wolfcode.wolf2w.service.IStrategyThemeService;
@@ -36,6 +34,9 @@ public class StrategyController {
 
     @Autowired
     private IStrategyRankService strategyRankService;
+
+    @Autowired
+    private IStrategyConditionService conditionService;
 
     @GetMapping("/content")
     private Object content(Long id) {
@@ -83,5 +84,13 @@ public class StrategyController {
         List<StrategyRank> ranks = strategyRankService.queryRank(type);
 
         return JsonResult.success(ranks);
+    }
+
+    @GetMapping("/condition")
+    private Object condition(int type) {
+
+        List<StrategyCondition> conditions = conditionService.queryStrategyCondition(type);
+
+        return JsonResult.success(conditions);
     }
 }

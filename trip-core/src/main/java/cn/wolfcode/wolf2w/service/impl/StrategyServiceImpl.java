@@ -1,9 +1,6 @@
 package cn.wolfcode.wolf2w.service.impl;
 
-import cn.wolfcode.wolf2w.domain.Destination;
-import cn.wolfcode.wolf2w.domain.Strategy;
-import cn.wolfcode.wolf2w.domain.StrategyCatalog;
-import cn.wolfcode.wolf2w.domain.StrategyContent;
+import cn.wolfcode.wolf2w.domain.*;
 import cn.wolfcode.wolf2w.mapper.StrategyContentMapper;
 import cn.wolfcode.wolf2w.mapper.StrategyMapper;
 import cn.wolfcode.wolf2w.query.StrategyQuery;
@@ -57,6 +54,11 @@ public class StrategyServiceImpl extends ServiceImpl<StrategyMapper,Strategy> im
         QueryWrapper<Strategy> wrapper = Wrappers.<Strategy>query();
         wrapper.eq(qo.getDestId() != null, "dest_id", qo.getDestId())
                 .eq(qo.getThemeId() != null, "theme_id", qo.getThemeId());
+
+        if (qo.getType() == StrategyCondition.TYPE_THEME && qo.getType() != null && qo.getRefid() != null)
+            wrapper.eq(qo.getRefid() >0 && qo.getRefid() > 0,"theme_id", qo.getRefid());
+        else if (qo.getType() != null && qo.getRefid() != null)
+            wrapper.eq(qo.getRefid() >0 && qo.getRefid() > 0,"dest_id", qo.getRefid());
         return super.page(page, wrapper);
     }
 

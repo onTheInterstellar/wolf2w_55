@@ -26,4 +26,12 @@ public interface IStrategyRankService extends IService<StrategyRank>{
      * @return
      */
     List<StrategyRank> queryRank(int type);
+
+
+    /**
+     * 攻略推荐排行管理
+     * @param type
+     */
+    void updateRank(Integer type);
+
 }

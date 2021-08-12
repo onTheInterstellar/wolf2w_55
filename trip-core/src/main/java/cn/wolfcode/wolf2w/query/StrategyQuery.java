@@ -13,5 +13,7 @@ public class StrategyQuery extends  QueryObject{
 
     private Long destId;
     private Long themeId;
+    private Integer type;
+    private Long refid;
 
 }

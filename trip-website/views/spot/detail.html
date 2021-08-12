@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:v-html="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <title></title>
+    <link href="/styles/base.css" rel="stylesheet" type="text/css">
+    <link href="/styles/travelspot.css" rel="stylesheet" type="text/css">
+    <link href="/styles/spot.css" rel="stylesheet" type="text/css">
+    <link href="/styles/select.css" rel="stylesheet" type="text/css">
+    <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="/js/jquery/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jqPaginator/jq-paginator.min.js"></script>
+    <script type="text/javascript" src="/js/plugins/jquery-form/jquery.form.js"></script>
+    <script src="/js/vue/md5.js"></script>
+    <script src="/js/plugins/js-cookie/js.cookie.min.js"></script>
+    <script type="text/javascript" src="/js/vue/common.js"></script>
+
+</head>
+<body >
+<div id="navbar">
+    <!--导航栏-->
+    <script>
+        var currentNav = "destination";
+        $('#navbar').load('/views/common/navbar.html');
+    </script>
+</div>
+<div id="app" v-cloak>
+    <div id="container" >
+        <div class="row row-top">
+            <div class="wrapper">
+                <!-- POI名称 S-->
+
+                <div class="title">
+                    <h1>{{spot.name}}</h1>
+                    <div class="en">{{spot.ename}}</div>
+                </div>
+                <!-- POI名称 E-->
+            </div>
+        </div>
+        <div v-html:msg = "spot.content.content"></div>
+
+    </div>
+</div>
+<div class="footer" id="footer">
+    <script>
+        $('#footer').load('/views/common/footer.html');
+    </script>
+</div>
+</body>
+<script src="/js/vue/vue.min.js"></script>
+<script src="/js/vue/system/spot/detail.js"></script>
+</html>
