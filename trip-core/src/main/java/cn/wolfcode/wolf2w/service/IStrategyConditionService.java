@@ -25,4 +25,12 @@ public interface IStrategyConditionService extends IService<StrategyCondition>{
      * @return
      */
     List<StrategyCondition> queryStrategyCondition(int type);
+
+
+    /**
+     * 攻略条件数据更新
+     * @param type
+     */
+    void updateCondition(Integer type);
+
 }

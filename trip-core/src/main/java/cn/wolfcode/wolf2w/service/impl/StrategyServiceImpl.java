@@ -52,13 +52,17 @@ public class StrategyServiceImpl extends ServiceImpl<StrategyMapper,Strategy> im
     public IPage<Strategy> queryPage(StrategyQuery qo) {
         IPage<Strategy> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
         QueryWrapper<Strategy> wrapper = Wrappers.<Strategy>query();
+
         wrapper.eq(qo.getDestId() != null, "dest_id", qo.getDestId())
                 .eq(qo.getThemeId() != null, "theme_id", qo.getThemeId());
 
-        if (qo.getType() == StrategyCondition.TYPE_THEME && qo.getType() != null && qo.getRefid() != null)
-            wrapper.eq(qo.getRefid() >0 && qo.getRefid() > 0,"theme_id", qo.getRefid());
-        else if (qo.getType() != null && qo.getRefid() != null)
-            wrapper.eq(qo.getRefid() >0 && qo.getRefid() > 0,"dest_id", qo.getRefid());
+        if (qo.getType() != null && qo.getRefid() != null) {
+            if (qo.getType() == StrategyCondition.TYPE_THEME)
+                wrapper.eq(qo.getRefid() >0 && qo.getRefid() > 0,"theme_id", qo.getRefid());
+            else
+                wrapper.eq(qo.getRefid() >0 && qo.getRefid() > 0,"dest_id", qo.getRefid());
+        }
+
         return super.page(page, wrapper);
     }
 

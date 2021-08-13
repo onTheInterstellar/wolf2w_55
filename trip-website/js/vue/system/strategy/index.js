@@ -78,6 +78,9 @@ var vue = new Vue({
         });
 
 
+        //分页
+        this.doPage(1);
+
 
 
 
@@ -139,41 +142,14 @@ var vue = new Vue({
 
 
 
-/*
-        ajaxGet("/strategies/rank",{type:1}, function (data) {
-            vue.abroadCds = data.data;
+        /*
+                ajaxGet("/strategies/themeCds",{}, function (data) {
+                    vue.themeCds = data.data;
 
-        })
-        ajaxGet("/strategies/rank",{type:2}, function (data) {
-            vue.chinaCds = data.data;
-
-        })
-        ajaxGet("/strategies/rank",{type:3}, function (data) {
-            vue.hotCds = data.data;
-
-        })
-
-        ajaxGet("/strategies/themeCds",{}, function (data) {
-            vue.themeCds = data.data;
-
-        })
-
-        ajaxGet("/strategies/condition",{type:1}, function (data) {
-            vue.abroads = data.data;
-        })
-        ajaxGet("/strategies/condition",{type:2}, function (data) {
-            vue.chinas = data.data;
-        })
-        ajaxGet("/strategies/condition",{type:3}, function (data) {
-            vue.themes = data.data;
-        })
-
-        ajaxGet("/banners/strategy",{}, function (data) {
-            vue.commends = data.data;
-        })*/
-
-        //分页
-        this.doPage(1);
+                })
+                ajaxGet("/banners/strategy",{}, function (data) {
+                    vue.commends = data.data;
+                })*/
 
 
     }

@@ -25,13 +25,6 @@ public class StrategyRankDataJob {
         rankService.updateRank(StrategyRank.TYPE_HOT);
 
 
-
-
-
-
-
-
-
         System.out.println("---------------攻略推荐数据维护---end----------------");
     }
 
