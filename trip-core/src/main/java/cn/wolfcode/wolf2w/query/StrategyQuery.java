@@ -15,5 +15,6 @@ public class StrategyQuery extends  QueryObject{
     private Long themeId;
     private Integer type;
     private Long refid;
+    private String orderBy;
 
 }

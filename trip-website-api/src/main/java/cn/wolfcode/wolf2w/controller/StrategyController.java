@@ -3,10 +3,7 @@ package cn.wolfcode.wolf2w.controller;
 import cn.wolfcode.wolf2w.domain.*;
 import cn.wolfcode.wolf2w.mapper.StrategyContentMapper;
 import cn.wolfcode.wolf2w.query.StrategyQuery;
-import cn.wolfcode.wolf2w.service.IStrategyConditionService;
-import cn.wolfcode.wolf2w.service.IStrategyRankService;
-import cn.wolfcode.wolf2w.service.IStrategyService;
-import cn.wolfcode.wolf2w.service.IStrategyThemeService;
+import cn.wolfcode.wolf2w.service.*;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +34,9 @@ public class StrategyController {
 
     @Autowired
     private IStrategyConditionService conditionService;
+
+    @Autowired
+    private IStrategyRecommendService recommendService;
 
     @GetMapping("/content")
     private Object content(Long id) {
@@ -92,5 +92,13 @@ public class StrategyController {
         List<StrategyCondition> conditions = conditionService.queryStrategyCondition(type);
 
         return JsonResult.success(conditions);
+    }
+
+    @GetMapping("/themeCds")
+    private Object themeCds() {
+
+        List<StrategyRecommend> recommends = recommendService.queryStrategyRecommend();
+
+        return JsonResult.success(recommends);
     }
 }

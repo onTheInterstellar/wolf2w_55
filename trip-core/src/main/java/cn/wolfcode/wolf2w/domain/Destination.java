@@ -34,7 +34,10 @@ public class Destination extends BaseDomain {
     @TableField(exist = false)
     private List<Destination> children = new ArrayList<>();
 
-
+    public Destination(Long id, String name) {
+        this.name = name;
+        this.id = id;
+    }
 
     public String getJsonString(){
         Map<String, Object> map = new HashMap<>();

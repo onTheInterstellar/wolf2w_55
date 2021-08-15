@@ -77,6 +77,12 @@ var vue = new Vue({
             _this.themes = data.data;
         });
 
+        ajaxGet("/strategies/themeCds", {}, function (data) {
+            _this.themeCds = data.data;
+        });
+
+
+
 
         //分页
         this.doPage(1);

@@ -54,7 +54,8 @@ public class StrategyServiceImpl extends ServiceImpl<StrategyMapper,Strategy> im
         QueryWrapper<Strategy> wrapper = Wrappers.<Strategy>query();
 
         wrapper.eq(qo.getDestId() != null, "dest_id", qo.getDestId())
-                .eq(qo.getThemeId() != null, "theme_id", qo.getThemeId());
+                .eq(qo.getThemeId() != null, "theme_id", qo.getThemeId())
+                .orderByDesc(qo.getOrderBy() != null, qo.getOrderBy());
 
         if (qo.getType() != null && qo.getRefid() != null) {
             if (qo.getType() == StrategyCondition.TYPE_THEME)
