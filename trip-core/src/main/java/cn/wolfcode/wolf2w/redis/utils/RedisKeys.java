@@ -11,7 +11,10 @@ public enum RedisKeys {
     USER_LONGIN_TOKEN("login_token", 30L),
 
     // 注册验证码
-    REGISTER_VERIFY_CODE("verify_code", 5L);
+    REGISTER_VERIFY_CODE("verify_code", 5L),
+
+    // 攻略数据统计, -1表示不设置超时时间
+    STRATEGY_STATIS_VO("strategy_statis_vo", -1L);
 
     // 字段
     // key的前缀

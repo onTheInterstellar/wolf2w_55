@@ -110,4 +110,12 @@ public class StrategyServiceImpl extends ServiceImpl<StrategyMapper,Strategy> im
 
         return flag;
     }
+
+    @Override
+    public List<Strategy> viewnumTop3(Long destId) {
+        QueryWrapper<Strategy> wrapper = new QueryWrapper<>();
+        wrapper.orderByDesc("viewnum")
+                .last("limit 3");
+        return super.list(wrapper);
+    }
 }

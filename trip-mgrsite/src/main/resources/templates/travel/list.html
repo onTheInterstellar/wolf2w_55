@@ -51,9 +51,11 @@
             <form class="form-inline" id="searchForm" action="/travel/list" method="post">
                 <input type="hidden" name="currentPage" id="currentPage" value="1">
                 <div class="form-group">
-                   <select id="stateSelect" name="state" class="form-control">
+                   <select id="stateSelect" name="state" class="form-control" th:field="${qo.state}">
+                       <option value="">全部</option>
                        <option value="1">待审核</option>
-                       <option value="-1">已拒绝</option>
+                       <option value="2">已审核</option>
+                       <option value="3">已拒绝</option>
                    </select>
                    <script>
                    </script>

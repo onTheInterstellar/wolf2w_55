@@ -1,6 +1,8 @@
 package cn.wolfcode.wolf2w.controller;
 
 import cn.wolfcode.wolf2w.domain.Travel;
+import cn.wolfcode.wolf2w.domain.TravelContent;
+import cn.wolfcode.wolf2w.mapper.TravelContentMapper;
 import cn.wolfcode.wolf2w.query.TravelQuery;
 import cn.wolfcode.wolf2w.service.ITravelService;
 import cn.wolfcode.wolf2w.util.JsonResult;
@@ -18,6 +20,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 @RequestMapping("travel")
 public class TravelController {
+
+    @Autowired
+    private TravelContentMapper contentMapper;
 
     @Autowired
     private ITravelService travelService;
@@ -48,4 +53,20 @@ public class TravelController {
         travelService.removeById(id);
         return JsonResult.success();
     }
+
+    @RequestMapping("/getContentById")
+    @ResponseBody
+    public Object getContentById(Long id){
+        TravelContent travelContent = contentMapper.selectById(id);
+        return JsonResult.success(travelContent.getContent());
+    }
+
+    @RequestMapping("/audit")
+    @ResponseBody
+    public Object audit(Long id, Integer state){
+        travelService.audit(id, state);
+        return JsonResult.success("操作成功");
+    }
+
+
 }

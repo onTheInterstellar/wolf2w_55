@@ -33,4 +33,11 @@ public interface IStrategyService extends IService<Strategy>{
      * @return
      */
     List<Strategy> queryStrategiesById(Long id);
+
+    /**
+     * 攻略浏览量前三
+     * @param destId
+     * @return
+     */
+    List<Strategy> viewnumTop3(Long destId);
 }

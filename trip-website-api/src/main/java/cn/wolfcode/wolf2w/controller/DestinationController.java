@@ -2,10 +2,7 @@ package cn.wolfcode.wolf2w.controller;
 
 import cn.wolfcode.wolf2w.domain.*;
 import cn.wolfcode.wolf2w.mapper.StrategyContentMapper;
-import cn.wolfcode.wolf2w.service.IDestinationService;
-import cn.wolfcode.wolf2w.service.IRegionService;
-import cn.wolfcode.wolf2w.service.IStrategyCatalogService;
-import cn.wolfcode.wolf2w.service.IStrategyService;
+import cn.wolfcode.wolf2w.service.*;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,6 +29,9 @@ public class DestinationController {
 
     @Autowired
     private StrategyContentMapper contentMapper;
+
+    @Autowired
+    private ITravelService travelService;
 
     @GetMapping("/hotRegion")
     private Object list() {
@@ -75,6 +75,15 @@ public class DestinationController {
 
     }
 
+    @GetMapping("/travels/viewnumTop3")
+    private Object viewnumTop3(Long destId) {
+        return JsonResult.success(travelService.viewnumTop3(destId));
+    }
+
+    @GetMapping("/strategies/viewnumTop3")
+    private Object strategiesViewnumTop3(Long destId) {
+        return JsonResult.success(strategyService.viewnumTop3(destId));
+    }
 
 
 }
