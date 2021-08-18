@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -26,36 +27,91 @@ public class StrategyStatisServiceImpl implements IStrategyStatisService {
     @Override
     public void updateVo(Long id) {
 
-        String voKey = RedisKeys.STRATEGY_STATIS_VO.join(id.toString());
+        StrategyStatisVo statisVo = getStatisVo(id);
+        statisVo.setViewnum(statisVo.getViewnum() + 1);
+        setStatisVo(statisVo);
 
-        Strategy strategy = null;
-        StrategyStatisVo statisVo = null;
-        if (!redisTemplate.hasKey(voKey)) {
-            strategy = strategyService.getById(id);
-            statisVo = new StrategyStatisVo();
-            BeanUtils.copyProperties(strategy, statisVo);
-            statisVo.setStrategyId(id);
+    }
+
+    @Override
+    public void replynumIncr(Long strategyId) {
+        StrategyStatisVo statisVo = getStatisVo(strategyId);
+        statisVo.setReplynum(statisVo.getReplynum() + 1);
+        setStatisVo(statisVo);
+    }
+
+    @Override
+    public boolean favor(Long sid, Long uid) {
+
+        String favorKey = RedisKeys.USER_STRATEGY_FAVOR.join(uid.toString());
+        List<Long> sidList = queryUserFavor(uid);
+
+        StrategyStatisVo statisVo = this.getStatisVo(sid);
+        if (sidList.contains(sid)) {
+            statisVo.setFavornum(statisVo.getFavornum() - 1);
+            sidList.remove(sid);
         } else {
-            String vo = redisTemplate.opsForValue().get(voKey);
-            statisVo = JSON.parseObject(vo, StrategyStatisVo.class);
-            statisVo.setViewnum(statisVo.getViewnum() + 1);
+            statisVo.setFavornum(statisVo.getFavornum() + 1);
+            sidList.add(sid);
         }
 
-        redisTemplate.opsForValue().set(voKey, JSON.toJSONString(statisVo));
+        redisTemplate.opsForValue().set(favorKey, JSON.toJSONString(sidList));
+        this.setStatisVo(statisVo);
 
+        return sidList.contains(sid);
+    }
+
+    @Override
+    public List<Long> queryUserFavor(Long uid) {
+
+        String favorKey = RedisKeys.USER_STRATEGY_FAVOR.join(uid.toString());
+        List<Long> sidList = null;
+
+        if (!redisTemplate.hasKey(favorKey)) {
+            sidList = new ArrayList<>();
+        } else {
+            String sidListStr = redisTemplate.opsForValue().get(favorKey);
+            sidList = JSON.parseArray(sidListStr, Long.class);
+        }
+        return sidList;
     }
 
     @Override
     public StrategyStatisVo getStatisVo(Long sid) {
 
         String voKey = RedisKeys.STRATEGY_STATIS_VO.join(sid.toString());
-        return JSON.parseObject(redisTemplate.opsForValue().get(voKey), StrategyStatisVo.class);
+
+        StrategyStatisVo statisVo = null;
+        if (!redisTemplate.hasKey(voKey)) {
+            Strategy strategy = strategy = strategyService.getById(sid);
+            statisVo = new StrategyStatisVo();
+            BeanUtils.copyProperties(strategy, statisVo);
+            statisVo.setStrategyId(sid);
+        } else {
+            String vo = redisTemplate.opsForValue().get(voKey);
+            statisVo = JSON.parseObject(vo, StrategyStatisVo.class);
+        }
+
+        return statisVo;
+    }
+
+    @Override
+    public void setStatisVo(StrategyStatisVo vo) {
+        String voKey = RedisKeys.STRATEGY_STATIS_VO.join(vo.getStrategyId().toString());
+        redisTemplate.opsForValue().set(voKey, JSON.toJSONString(vo));
     }
 
     @Override
     public void updateVoToTable() {
         Set<String> keys = redisTemplate.keys("*" + RedisKeys.STRATEGY_STATIS_VO.getPrefix() + "*");
         List<String> list = redisTemplate.opsForValue().multiGet(keys);
-        list.stream().map(str -> JSON.parseObject(str, StrategyStatisVo.class)).map(vo -> {Strategy strategy = new Strategy();BeanUtils.copyProperties(vo, strategy);strategy.setId(vo.getStrategyId());return strategy; }).forEach(strategy -> strategyService.updateById(strategy));
+        list.stream().map(str -> JSON.parseObject(str, StrategyStatisVo.class))
+                .map(
+                        vo -> {Strategy strategy = new Strategy();
+                        BeanUtils.copyProperties(vo, strategy);
+                        strategy.setId(vo.getStrategyId());
+                        return strategy; }
+                        )
+                .forEach(strategy -> strategyService.updateById(strategy));
     }
 }

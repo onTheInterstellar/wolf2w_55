@@ -77,7 +77,6 @@ var vue = new Vue({
         queryStatisVo:function (sid) {
             //统计数据
             ajaxGet("/strategies/statisVo",{sid:sid}, function (data) {
-                console.log(data)
                 vue.vo =data.data;
             })
 
@@ -85,7 +84,6 @@ var vue = new Vue({
         },
         queryUserFavor:function (sid,userId) {
             ajaxGet("/users/strategies/favor",{sid:vue.strategy.id, userId:userId}, function (data) {
-                console.log(data.data);
                 if(data.data){
                     $(".btn-collect i").addClass('on-i02');
                 }else{

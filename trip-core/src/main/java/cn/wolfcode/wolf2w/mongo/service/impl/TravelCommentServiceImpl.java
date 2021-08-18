@@ -37,6 +37,6 @@ public class TravelCommentServiceImpl implements ITravelCommentService {
 
     @Override
     public List<TravelComment> findByTravelId(Long travelId) {
-        return repository.findByTravelId(travelId);
+        return repository.findByTravelIdOrderByCreateTimeDesc(travelId);
     }
 }

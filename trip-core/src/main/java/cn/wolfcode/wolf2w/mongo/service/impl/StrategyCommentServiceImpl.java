@@ -4,11 +4,9 @@ import cn.wolfcode.wolf2w.mongo.domain.StrategyComment;
 import cn.wolfcode.wolf2w.mongo.query.StrategyCommentQuery;
 import cn.wolfcode.wolf2w.mongo.repository.StrategyCommentRepository;
 import cn.wolfcode.wolf2w.mongo.service.IStrategyCommentService;
+import cn.wolfcode.wolf2w.redis.service.IStrategyStatisService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -26,6 +24,9 @@ public class StrategyCommentServiceImpl implements IStrategyCommentService {
     @Autowired
     private MongoTemplate mongoTemplate;
 
+    @Autowired
+    private IStrategyStatisService statisService;
+
     @Override
     public void saveComment(StrategyComment comment) {
 
@@ -33,6 +34,8 @@ public class StrategyCommentServiceImpl implements IStrategyCommentService {
         comment.setId(null);
         comment.setCreateTime(new Date());
         repository.save(comment);
+        statisService.replynumIncr(comment.getStrategyId());
+
     }
 
     @Override
@@ -47,6 +50,8 @@ public class StrategyCommentServiceImpl implements IStrategyCommentService {
         if (totalCount != 0) {
             Pageable pageable = PageRequest.of(qo.getCurrentPage() - 1, qo.getPageSize());
             query.with(pageable);
+            Sort createTime = Sort.by(Sort.Direction.DESC, "createTime");
+            query.with(createTime);
             List<StrategyComment> data = mongoTemplate.find(query, StrategyComment.class);
             return new PageImpl<>(data, pageable, totalCount);
         } else {

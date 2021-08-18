@@ -1,7 +1,9 @@
 package cn.wolfcode.wolf2w.controller;
 
+import cn.wolfcode.wolf2w.annotation.RequireLogin;
 import cn.wolfcode.wolf2w.domain.UserInfo;
 import cn.wolfcode.wolf2w.redis.service.IRedisService;
+import cn.wolfcode.wolf2w.redis.service.IStrategyStatisService;
 import cn.wolfcode.wolf2w.service.IUserInfoService;
 import cn.wolfcode.wolf2w.util.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 
 @RestController
 @RequestMapping("users")
@@ -23,6 +26,8 @@ public class UserInfoController {
     @Autowired
     private IUserInfoService userInfoService;
 
+    @Autowired
+    private IStrategyStatisService statisService;
     //@RequireLogin
     @GetMapping("/currentUser")
     public Object currentUser(HttpServletRequest request) {
@@ -65,6 +70,13 @@ public class UserInfoController {
     public Object sendVerifyCode(String phone) {
         userInfoService.sendVerifyCode(phone);
         return JsonResult.success("验证码发送成功");
+    }
+
+    @RequireLogin
+    @GetMapping("/strategies/favor")
+    private Object queryFavor(Long sid, Long userId) {
+        List<Long> result = statisService.queryUserFavor(userId);
+        return JsonResult.success(result.contains(sid));
     }
 
 }

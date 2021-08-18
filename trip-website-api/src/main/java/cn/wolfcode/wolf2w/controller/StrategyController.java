@@ -151,5 +151,12 @@ public class StrategyController {
 
     }
 
+    @RequireLogin
+    @PostMapping("/favor")
+    private Object favor(Long sid, @CustomizeParameterResolver UserInfo userInfo) {
+        boolean result = statisService.favor(sid, userInfo.getId());
+        return JsonResult.success(result);
+    }
+
 
 }

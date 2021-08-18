@@ -19,7 +19,6 @@ public interface IStrategyService extends IService<Strategy>{
     */
     IPage<Strategy> queryPage(StrategyQuery qo);
 
-
     /**
      * 重写saveOrUpdate
      * @param strategy

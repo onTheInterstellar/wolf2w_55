@@ -8,5 +8,10 @@ import java.util.List;
 public interface TravelCommentRepository extends MongoRepository<TravelComment, String> {
 
 
-    List<TravelComment> findByTravelId(Long travelId);
+    /**
+     * jpa按照创建时间查travel评论
+     * @param travelId
+     * @return
+     */
+    List<TravelComment> findByTravelIdOrderByCreateTimeDesc(Long travelId);
 }

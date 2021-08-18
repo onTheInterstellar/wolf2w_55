@@ -14,7 +14,11 @@ public enum RedisKeys {
     REGISTER_VERIFY_CODE("verify_code", 5L),
 
     // 攻略数据统计, -1表示不设置超时时间
-    STRATEGY_STATIS_VO("strategy_statis_vo", -1L);
+    STRATEGY_STATIS_VO("strategy_statis_vo", -1L),
+
+    // 用户收藏状态
+    USER_STRATEGY_FAVOR("user_strategy_favor", -1L);
+
 
     // 字段
     // key的前缀
