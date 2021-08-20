@@ -4,7 +4,6 @@ var vue = new Vue({
         page:{},
         day:getIndexTime(),
         banners:[],
-        page:{},
         stBanner:{}
     },
     methods:{
@@ -48,16 +47,38 @@ var vue = new Vue({
     },
     mounted:function () {
 
-        ajaxGet("/banners/travel",{}, function (data) {
-            vue.banners = data.data;  //游记banner，前面5个
-        })
+        ajaxGet("/banners/travel", {}, function (data) {
+            vue.banners = data.data;
+        });
 
-        ajaxGet("/banners/strategy",{}, function (data) {
-            vue.stBanner = data.data[0];  //攻略
-        })
-
+        ajaxGet("/banners/strategy", {}, function (data) {
+            vue.stBanner = data.data[0];
+        });
         //游记分页
         this.doPage(1);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        /*
+                ajaxGet("/banners/travel",{}, function (data) {
+                    vue.banners = data.data;  //游记banner，前面5个
+                })
+
+                ajaxGet("/banners/strategy",{}, function (data) {
+                    vue.stBanner = data.data[0];  //攻略
+                })
+        */
 
 
     }

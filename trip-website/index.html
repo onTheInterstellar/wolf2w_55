@@ -30,7 +30,7 @@
             <ul class="show-image">
 
                 <li v-if="banners.length" v-for="(b, index) in banners" :class="index==0?'first':''" class="show_image" :data-id="index">
-                    <a :href="'/views/travel/detail.html?id='+b.refid" class="show-pic">
+                    <a :href="'/views/travel/detail.html?id='+b.refid + '&destId=' + b.destId" class="show-pic">
                         <img :src="b.coverUrl">
                     </a>
                     <a href="javascript:;" class="show-title dark">
@@ -213,7 +213,7 @@
                 <div class="asidebox-bd">
                     <div class="gonglve-item">
                         <div class="img">
-                            <a href="javascript:;" target="_blank">
+                            <a :href="'/views/strategy/detail.html?id='+stBanner.refid" target="_blank">
                                 <img :src="stBanner.coverUrl" width="200px"><span class="mark">自由行攻略</span></a>
                         </div>
                         <h3><a href="javascript:;" target="_blank">{{stBanner.subTitle}}</a></h3>

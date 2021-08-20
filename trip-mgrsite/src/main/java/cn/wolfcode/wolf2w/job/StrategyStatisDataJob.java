@@ -10,7 +10,7 @@ public class StrategyStatisDataJob {
     @Autowired
     private IStrategyStatisService statisService;
 
-    @Scheduled(cron = "* * * * * *")
+    @Scheduled(cron = "0/5 * * * * *")
     public void doWork() {
 
         System.out.println("---------------攻略统计数据维护--start---------------");

@@ -56,4 +56,11 @@ public interface IStrategyStatisService {
      */
     List<Long> queryUserFavor(Long userId);
 
+    /**
+     * 用户点赞操作
+     * @param sid
+     * @param uid
+     * @return true 表示点赞成功, false 表示已经点赞过了
+     */
+    boolean thumbUp(Long sid, Long uid);
 }

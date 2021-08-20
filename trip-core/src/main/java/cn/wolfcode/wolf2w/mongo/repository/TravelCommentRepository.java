@@ -13,5 +13,6 @@ public interface TravelCommentRepository extends MongoRepository<TravelComment, 
      * @param travelId
      * @return
      */
+    //@Query(value = "select * from travel_comment limit 2")
     List<TravelComment> findByTravelIdOrderByCreateTimeDesc(Long travelId);
 }

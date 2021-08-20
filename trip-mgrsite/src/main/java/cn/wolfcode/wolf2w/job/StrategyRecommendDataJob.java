@@ -3,9 +3,8 @@ package cn.wolfcode.wolf2w.job;
 import cn.wolfcode.wolf2w.service.IStrategyRecommendService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class StrategyRecommendDataJob {
 
     @Autowired

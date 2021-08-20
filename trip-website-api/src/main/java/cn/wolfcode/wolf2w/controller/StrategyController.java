@@ -158,5 +158,10 @@ public class StrategyController {
         return JsonResult.success(result);
     }
 
-
+    @RequireLogin
+    @PostMapping("/strategyThumbup")
+    private Object strategyThumbup(Long sid, @CustomizeParameterResolver UserInfo userInfo) {
+        boolean result = statisService.thumbUp(sid, userInfo.getId());
+        return JsonResult.success(result);
+    }
 }

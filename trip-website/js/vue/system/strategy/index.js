@@ -5,7 +5,6 @@ var vue = new Vue({
         chinaCds:[],
         hotCds:[],
         themeCds:[],
-        commends:[],
 
         chinas:[],
         abroads:[],
@@ -81,7 +80,9 @@ var vue = new Vue({
             _this.themeCds = data.data;
         });
 
-
+        ajaxGet("/banners/strategy", {}, function (data) {
+            _this.commends = data.data;
+        });
 
 
         //分页

@@ -4,9 +4,8 @@ import cn.wolfcode.wolf2w.domain.StrategyCondition;
 import cn.wolfcode.wolf2w.service.IStrategyConditionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
-import org.springframework.stereotype.Component;
 
-@Component
+//@Component
 public class StrategyConditionDataJob {
 
     @Autowired

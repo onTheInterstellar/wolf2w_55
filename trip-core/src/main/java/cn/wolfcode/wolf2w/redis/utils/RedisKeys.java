@@ -17,7 +17,9 @@ public enum RedisKeys {
     STRATEGY_STATIS_VO("strategy_statis_vo", -1L),
 
     // 用户收藏状态
-    USER_STRATEGY_FAVOR("user_strategy_favor", -1L);
+    USER_STRATEGY_FAVOR("user_strategy_favor", -1L),
+
+    USER_STRATEGY_THUMB("user_strategy_thumb", -1L);
 
 
     // 字段

@@ -5,6 +5,7 @@ import cn.wolfcode.wolf2w.redis.service.IStrategyStatisService;
 import cn.wolfcode.wolf2w.redis.utils.RedisKeys;
 import cn.wolfcode.wolf2w.redis.vo.StrategyStatisVo;
 import cn.wolfcode.wolf2w.service.IStrategyService;
+import cn.wolfcode.wolf2w.util.DateUtil;
 import com.alibaba.fastjson.JSON;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,8 +13,10 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class StrategyStatisServiceImpl implements IStrategyStatisService {
@@ -62,6 +65,24 @@ public class StrategyStatisServiceImpl implements IStrategyStatisService {
     }
 
     @Override
+    public boolean thumbUp(Long sid, Long uid) {
+
+        String thumbUpKey = RedisKeys.USER_STRATEGY_THUMB.join(uid.toString(), sid.toString());
+
+        Date dateStart = new Date();
+        Date dateEnd = DateUtil.getEndDate(dateStart);
+        if (!redisTemplate.hasKey(thumbUpKey)) {
+            StrategyStatisVo statisVo = this.getStatisVo(sid);
+            statisVo.setThumbsupnum(statisVo.getThumbsupnum() + 1);
+            this.setStatisVo(statisVo);
+            redisTemplate.opsForValue().set(thumbUpKey, "今天已顶", DateUtil.getDateBetween(dateEnd,dateStart), TimeUnit.SECONDS);
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    @Override
     public List<Long> queryUserFavor(Long uid) {
 
         String favorKey = RedisKeys.USER_STRATEGY_FAVOR.join(uid.toString());
@@ -106,12 +127,13 @@ public class StrategyStatisServiceImpl implements IStrategyStatisService {
         Set<String> keys = redisTemplate.keys("*" + RedisKeys.STRATEGY_STATIS_VO.getPrefix() + "*");
         List<String> list = redisTemplate.opsForValue().multiGet(keys);
         list.stream().map(str -> JSON.parseObject(str, StrategyStatisVo.class))
-                .map(
-                        vo -> {Strategy strategy = new Strategy();
-                        BeanUtils.copyProperties(vo, strategy);
-                        strategy.setId(vo.getStrategyId());
-                        return strategy; }
-                        )
+                .map(vo -> {
+                    Strategy strategy = new Strategy();
+                            BeanUtils.copyProperties(vo, strategy);
+                            strategy.setId(vo.getStrategyId());
+                            return strategy;
+                })
                 .forEach(strategy -> strategyService.updateById(strategy));
     }
+
 }
