@@ -155,7 +155,6 @@ var vue = new Vue({
 
         //游记点击量前3
         ajaxGet("/destinations/travels/viewnumTop3",{destId:param.destId}, function (data) {
-            console.log(data);
             _this.travels = data.data;
         })
 

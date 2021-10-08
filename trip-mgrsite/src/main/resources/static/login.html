@@ -27,7 +27,6 @@ body{
 	$(function(){
 		$("#btn_submit").click(function () {
 			$.post("/login", $("#loginForm").serialize(), function (data) {
-			    console.log(data);
                 if(data.success){
                     window.location.href="/main";
                 }else{

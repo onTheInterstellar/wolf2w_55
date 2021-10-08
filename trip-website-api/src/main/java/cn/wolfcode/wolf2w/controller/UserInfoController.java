@@ -43,6 +43,25 @@ public class UserInfoController {
         return userInfoService.getById(id);
     }
 
+    @GetMapping("/get")
+    public Object get(Long id, HttpServletRequest request) {
+
+        //访客id
+        String vToken = request.getHeader("token");
+        redisService.setVisitor(vToken, id);
+        return JsonResult.success(userInfoService.getById(id));
+    }
+
+    @GetMapping("/visitors")
+    public Object visitors(Long id) {
+
+        //主人id
+
+        return JsonResult.success(redisService.getVisitorsByOwnerId(id));
+    }
+
+
+
     @PostMapping("/login")
     private Object login(String username, String password) {
 
@@ -50,6 +69,8 @@ public class UserInfoController {
         //new HashMap<>();
         return JsonResult.success(map);
     }
+
+
 
 
     @PostMapping("/register")

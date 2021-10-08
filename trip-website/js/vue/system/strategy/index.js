@@ -35,7 +35,6 @@ var vue = new Vue({
 
         },
         doPage:function (page) {
-            console.log($("#searchForm").serialize());
 
             $("#searchForm input[name='currentPage']").val(page);
             ajaxGet("/strategies/query",$("#searchForm").serialize(), function (data) {

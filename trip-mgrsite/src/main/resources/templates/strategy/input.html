@@ -33,7 +33,7 @@
                 'onUploadComplete' : function(file, data) {
                     $("#imgUrl").attr("src" ,data);  //data约定是json格式 图片地址
                     $("#coverUrl").val(data);
-                    console.log(data)
+                    //console.log(data)
                 },
                 onFallback : function() {
                     $.messager.alert("温馨提示","该浏览器无法使用!");
@@ -44,7 +44,6 @@
                 //异步提交时， 富文本框可能出问题
                 $("#content").val(ck.getData())
                 $("#editForm").ajaxSubmit(function (data) {
-                    console.log(data);
                     if(data.code == 200){
                         window.location.href = "/strategy/list";
                     }else{

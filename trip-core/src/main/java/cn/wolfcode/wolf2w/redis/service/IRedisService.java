@@ -3,6 +3,8 @@ package cn.wolfcode.wolf2w.redis.service;
 
 import cn.wolfcode.wolf2w.domain.UserInfo;
 
+import java.util.Map;
+
 public interface IRedisService {
 
     /**
@@ -34,4 +36,18 @@ public interface IRedisService {
      * @return
      */
     UserInfo getUserInfoByToken(String token);
+
+    /**
+     * 设置访客
+     * @param vToken
+     * @param uId
+     */
+    void setVisitor(String vToken, Long uId);
+
+    /**
+     * 通过id查找访客
+     * @param id
+     * @return
+     */
+    Map<String, Object> getVisitorsByOwnerId(Long id);
 }

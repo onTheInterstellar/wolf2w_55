@@ -103,6 +103,8 @@ function getUserInfo(){
                 user[p] = decodeURIComponent(user[p]);
             }
         }
+        console.log(user.domain)
+        console.log(user.id)
         return user;
     }
     return null;

@@ -6,7 +6,6 @@ var vue = new Vue({
     methods:{
     },
     mounted:function () {
-        console.log(1111111)
         var param = getParams();
         var id = param.id;
         //景点明细

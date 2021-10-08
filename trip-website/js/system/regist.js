@@ -53,7 +53,6 @@ $(function () {
             var phone = $("#phone").val();
             $.get(domainUrl + "/users/sendVerifyCode", {phone:phone}, function (data) {
 
-                console.log(data);
                 if(data.code == 200){
                     popup("发送成功")
                 }else{

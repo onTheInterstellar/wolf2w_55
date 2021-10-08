@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <title></title>
+    <title>49</title>
     <link href="../../styles/base.css" rel="stylesheet" type="text/css">
     <link href="../../styles/homepage.css" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="/js/jquery/jquery.js"></script>
@@ -109,7 +109,7 @@
                             <li class="on"><a class="tags_link" href="javascript:;" title="我的窝">我的窝</a></li>
                             <li><a class="tags_link" href="./mytravelnotes.html" title="我的游记">我的游记</a></li>
                             <li><a class="tags_link" href="./review.html" title="我的点评">我的点评</a></li>
-                            <li id="_j_pathnav"><a class="tags_link" href="../collection/collection.html" title="我的收藏">我的收藏</a></li>
+                            <li id="_j_pathnav"><a class="tags_link" href="./travelcollection.html" title="我的收藏">我的收藏</a></li>
                             <li><a class="tags_link" href="javascript:;" title="我的订单">我的订单</a></li>
                             <li><a class="tags_link" href="./setting.html" title="设置">设置</a></li>
                         </ul>
@@ -136,13 +136,13 @@
                         </div>
                         <div class="MAvaInfo clearfix MAvaMyInfo">
                             <span class="MAvaLevel flt1">等级：<a href="javascript:;" title="Lv.5"
-                                                               target="_blank">Lv.{{owner.level}}</a></span>
-                            <span class="MAvaPlace flt1" title="广州">现居：{{owner.city}}</span>
+                                                               target="_blank">Lv.5</a></span>
+                            <span class="MAvaPlace flt1" title="广州">现居：广州</span>
                             <span class="MAvaSet"><a title="设置"href="javascript:;" target="_blank"></a></span>
                         </div>
                         <div id="_j_profilearea" class="MAvaProfile">
-                            <div >
-                                <pre>{{owner.info}}</pre>
+                            <div class="MProfile _j_showintrobox" data-intro="sdddds" style="display: block;">
+                                <pre>{{owner?owner.info:''}}</pre>
                             </div>
                             <div class="MAvaInput _j_inputarea hide">
                                 <textarea id="_j_introarea" placeholder="例：摄影师/旅居澳洲/潜水爱好者" maxlength="100"></textarea>
@@ -152,11 +152,11 @@
                         </div>
                         <div class="MAvaMore clearfix">
                             <div class="MAvaNums">
-                                <strong><a :href="'/views/personal/follow.html?ownerId='+owner.id">13</a></strong>
+                                <strong><a href="javascript:;" target="_blank">13</a></strong>
                                 <p>关注</p>
                             </div>
                             <div class="MAvaNums">
-                                <strong><a :href="'/views/personal/fans.html?ownerId='+owner.id">0</a></strong>
+                                <strong><a href="javascript:;" target="_blank">0</a></strong>
                                 <p>粉丝</p>
                             </div>
                             <div class="MAvaNums last">
@@ -167,7 +167,7 @@
                     </div>
 
                     <div class="MUsers">
-                        <div class="MUsersTitle">最新访客 <a :href="'/views/personal/visitor.html?ownerId='+owner.id">更多</a></div>
+                        <div class="MUsersTitle">最新访客 <a :href="'/views/personal/fans.html?ownerId='+owner.id">更多</a></div>
                         <div class="MUsersDetail">
                             <ul class="clearfix">
                                 <li v-for="u in visitors">

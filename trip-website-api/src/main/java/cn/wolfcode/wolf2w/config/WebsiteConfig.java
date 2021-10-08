@@ -13,7 +13,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import java.util.List;
 
 @Configuration
-public class WebsiteConfig implements WebMvcConfigurer {
+public class WebsiteConfig implements WebMvcConfigurer  {
 
     @Bean
     public HandlerInterceptor checkLoginInterceptor() {

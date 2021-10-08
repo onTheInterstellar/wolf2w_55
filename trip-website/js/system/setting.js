@@ -37,7 +37,6 @@ $(function () {
             data.submit();
         },
         done:function (e, data) {
-            console.log(data);
             $("#imageBtn").attr("src", "/" + data.result.data);
         }
     });

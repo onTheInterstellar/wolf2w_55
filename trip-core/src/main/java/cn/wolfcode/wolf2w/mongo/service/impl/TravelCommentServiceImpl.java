@@ -23,7 +23,7 @@ public class TravelCommentServiceImpl implements ITravelCommentService {
     @Override
     public void saveComment(TravelComment comment) {
 
-        //将id设置为null, 方式传入的是空字符串
+        //将id设置为null, 防止传入的是空字符串
         comment.setId(null);
         comment.setCreateTime(new Date());
 

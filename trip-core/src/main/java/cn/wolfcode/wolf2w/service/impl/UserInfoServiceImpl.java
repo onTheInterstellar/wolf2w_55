@@ -68,6 +68,7 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         AssertUtil.hasText(rpassword, "重复的密码不能为空");
         AssertUtil.hasText(verifyCode, "验证码不能为空");
 
+
         //判断手机格式是否正确
         AssertUtil.checkPhoneFormat(phone, "手机号码格式不正确");
         //判断手机号是否存在
@@ -116,12 +117,12 @@ public class UserInfoServiceImpl extends ServiceImpl<UserInfoMapper, UserInfo> i
         // 真实发送短信
         // 下面的信息可以放到配置文件中, 判断是否成功的success每一个网关都不太一样
         //String appKey = "1f5921e1a61866d5c82b38a9381ea14f";
-        //String url = "https://way.jd.com/chuangxin/dxjk?mobile={phoneNumber}&content=【创信】{message}&appkey={0}";
+//        String url = "https://way.jd.com/chuangxin/dxjk?mobile={phoneNumber}&content=【创信】{message}&appkey={0}";
 
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().set(1,new StringHttpMessageConverter(StandardCharsets.UTF_8));
 
-        String result = restTemplate.getForObject(this.gateway, String.class);
+        String result = restTemplate.getForObject(this.gateway, String.class, phone, message,this.appKey);
         System.out.println(result);
         if (!result.contains(success)) {
             throw new LogicException("验证码发送失败!");

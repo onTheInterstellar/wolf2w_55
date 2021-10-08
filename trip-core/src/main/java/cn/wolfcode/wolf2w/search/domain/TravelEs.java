@@ -25,4 +25,4 @@ public class TravelEs implements Serializable {
     private String title;  //游记标题
     @Field(index=true,analyzer="ik_max_word",store=true,searchAnalyzer="ik_max_word",type = FieldType.Text)
     private String summary; //游记简介
-}
+        }

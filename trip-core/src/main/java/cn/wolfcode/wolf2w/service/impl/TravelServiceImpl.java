@@ -36,7 +36,7 @@ public class TravelServiceImpl extends ServiceImpl<TravelMapper,Travel> implemen
     @Override
     public IPage<Travel> queryPage(TravelQuery qo) {
         IPage<Travel> page = new Page<>(qo.getCurrentPage(), qo.getPageSize());
-        QueryWrapper<Travel> wrapper = Wrappers.<Travel>query();
+        QueryWrapper<Travel> wrapper = Wrappers.query();
         wrapper.eq(qo.getState() != null, "state", qo.getState())
                 .eq(qo.getDestId() != null, "dest_id", qo.getDestId())
                 .orderByDesc(qo.getOrderBy() != null, qo.getOrderBy());

@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>骡窝窝-首页</title>
+    <title>螺窝窝</title>
     <link href="/styles/base.css" rel="stylesheet" type="text/css">
     <link href="/styles/index.css" rel="stylesheet" type="text/css">
     <link href="/js/plugins/jqPaginator/jqPagination.css" rel="stylesheet" type="text/css">
@@ -30,7 +30,7 @@
             <ul class="show-image">
 
                 <li v-if="banners.length" v-for="(b, index) in banners" :class="index==0?'first':''" class="show_image" :data-id="index">
-                    <a :href="'/views/travel/detail.html?id='+b.refid + '&destId=' + b.destId" class="show-pic">
+                    <a :href="'/views/travel/detail.html?id='+b.refId" class="show-pic">
                         <img :src="b.coverUrl">
                     </a>
                     <a href="javascript:;" class="show-title dark">
@@ -133,10 +133,10 @@
                 <div class="navbar clearfix">
                     <ul class="tn-nav" id="_j_tn_nav">
                         <li class="_j_gs_tab tn-nav-hot active">
-                            <a href="javascript:void(0);" @click="orderBy('viewnum')" >热门游记</a>
+                            <a href="javascript:void(0);" @click="orderBy(1)" >热门游记</a>
                         </li>
                         <li class="_j_gs_tab tn-nav-new">
-                            <a href="javascript:void(0);" @click="orderBy('create_time')">最新发表</a>
+                            <a href="javascript:void(0);" @click="orderBy(2)">最新发表</a>
                         </li>
                     </ul>
                     <div class="tn-write"><a class="btn-add" href="/travel/input" target="_blank" rel="nofollow"><i></i>写游记</a>
@@ -144,7 +144,7 @@
                 </div>
                 <div class="pagelet-block">
                     <form method="post" id="searchForm">
-                        <input type="hidden" name="orderBy" value="viewnum" id="orderType">
+                        <input type="hidden" name="orderType" value="1" id="orderType">
                         <div id="_j_tn_content">
                             <!--游记-->
                             <div class="tn-list">
@@ -189,7 +189,7 @@
                             <br><br>
                             <!--分页-->
                             <div style="float: right" >
-                                <div style="float: left;" ><span style="line-height:30px"> 共{{page.pages}}页 / {{page.total}}条&nbsp;&nbsp;&nbsp;</span></div>
+                                <div style="float: left;" ><span style="line-height:30px"> 共{{page.totalPages}}页 / {{page.totalElements}}条&nbsp;&nbsp;&nbsp;</span></div>
                                 <div id="pagination" class="jq-pagination" style="display: inline;"></div>
                             </div>
 
@@ -213,7 +213,7 @@
                 <div class="asidebox-bd">
                     <div class="gonglve-item">
                         <div class="img">
-                            <a :href="'/views/strategy/detail.html?id='+stBanner.refid" target="_blank">
+                            <a href="javascript:;" target="_blank">
                                 <img :src="stBanner.coverUrl" width="200px"><span class="mark">自由行攻略</span></a>
                         </div>
                         <h3><a href="javascript:;" target="_blank">{{stBanner.subTitle}}</a></h3>

@@ -1,5 +1,6 @@
 package cn.wolfcode.wolf2w.search.vo;
 
+import cn.wolfcode.wolf2w.domain.Destination;
 import cn.wolfcode.wolf2w.domain.Strategy;
 import cn.wolfcode.wolf2w.domain.Travel;
 import cn.wolfcode.wolf2w.domain.UserInfo;
@@ -18,5 +19,6 @@ public class SearchResultVO implements Serializable{
     private List<Strategy> strategys = Collections.emptyList();
     private List<Travel> travels = Collections.emptyList();
     private List<UserInfo> users = Collections.emptyList();
+    private List<Destination> dests = Collections.emptyList();
 
 }

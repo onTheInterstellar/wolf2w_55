@@ -70,6 +70,7 @@ public class ElasticSearchDataInitController<T,K,V,G> {
         for (UserInfo userInfo : list) {
             UserInfoEs userInfoEs = new UserInfoEs();
             BeanUtils.copyProperties(userInfo, userInfoEs);
+            userInfoEs.setId(userInfo.getId().toString());
             userInfoEsService.save(userInfoEs);
         }
 
@@ -81,6 +82,7 @@ public class ElasticSearchDataInitController<T,K,V,G> {
         for (Travel travel : list) {
             TravelEs travelEs = new TravelEs();
             BeanUtils.copyProperties(travel, travelEs);
+            travelEs.setId(travel.getId().toString());
             travelEsService.save(travelEs);
         }
     }
@@ -91,6 +93,7 @@ public class ElasticSearchDataInitController<T,K,V,G> {
         for (Strategy strategy : list) {
             StrategyEs strategyEs = new StrategyEs();
             BeanUtils.copyProperties(strategy, strategyEs);
+            strategyEs.setId(strategy.getId().toString());
             strategyEsService.save(strategyEs);
         }
     }
@@ -101,6 +104,7 @@ public class ElasticSearchDataInitController<T,K,V,G> {
         for (Destination destination : list) {
             DestinationEs destinationEs = new DestinationEs();
             BeanUtils.copyProperties(destination, destinationEs);
+            destinationEs.setId(destination.getId().toString());
             destinationEsService.save(destinationEs);
         }
     }

@@ -19,7 +19,19 @@ public enum RedisKeys {
     // 用户收藏状态
     USER_STRATEGY_FAVOR("user_strategy_favor", -1L),
 
-    USER_STRATEGY_THUMB("user_strategy_thumb", -1L);
+    // 用户攻略点赞
+    USER_STRATEGY_THUMB("user_strategy_thumb", -1L),
+
+    // 用户攻略点赞
+    BRUSH_PROOF("brush_proof", 60L),
+
+    USER_VISITORS("user_visitors", -1L),
+
+    VISITOR_STATIS_VO("visitor_statis_vo", -1L);
+
+
+
+
 
 
     // 字段

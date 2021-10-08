@@ -62,7 +62,6 @@
             $(".submitBtn").click(function () {
                 //模态框表单提交
                 $("#editForm").ajaxSubmit(function (data) {
-                    console.log(data);
                     if(data.code == 200){
                         window.location.reload();
                     }else{
