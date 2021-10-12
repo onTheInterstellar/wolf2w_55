@@ -1,0 +1,10 @@
+version: '2'
+services:
+  nginx_01:
+    image: mumuyaya/dockerfile
+    ports:
+      - "8080:80"
+  nginx_02:
+    image: mumuyaya/dockerfile
+    ports:
+      - "8090:80"

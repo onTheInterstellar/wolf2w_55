@@ -11,7 +11,7 @@ if(token&&user){
 }
 
 //api ip与端口
-var domainUrl = "http://localhost:8080";
+var domainUrl = "http://159.75.242.219/:8080";
 
 //异步请求
 function ajaxRequest(url,type, param, success, fail){

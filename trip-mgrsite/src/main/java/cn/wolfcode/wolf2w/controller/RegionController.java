@@ -35,7 +35,7 @@ public class RegionController {
 
         map.put("page", page);
         map.put("dests", dests);
-        return "/region/list.html";
+        return "region/list.html";
 
     }
 

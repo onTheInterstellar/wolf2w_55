@@ -27,7 +27,7 @@ public class DestinationController {
         map.put("page", page);
         map.put("toasts", toasts);
 
-        return "/destination/list.html";
+        return "destination/list.html";
 
     }
 
